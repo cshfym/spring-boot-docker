@@ -1,5 +1,6 @@
-package com.cshfym.services.kafka
+package com.cshfym.server.services
 
+import com.cshfym.server.models.SimpleMessage
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,11 +10,11 @@ import org.springframework.stereotype.Service
 class KafkaService {
 
     @Autowired
-    KafkaProducer<String,String> kafkaProducer
+    KafkaProducer<String,SimpleMessage> kafkaProducer
 
-    void send(String message) {
+    void send(SimpleMessage simpleMessage) {
 
-        def producerRecord = new ProducerRecord<String,String>("TestTopic", message)
+        def producerRecord = new ProducerRecord<String,SimpleMessage>("TestTopic", simpleMessage)
 
         kafkaProducer.send(producerRecord)
     }

@@ -1,5 +1,6 @@
-package com.cshfym.services.kafka
+package com.cshfym.server.config
 
+import com.cshfym.server.models.SimpleMessage
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -12,15 +13,17 @@ class KafkaConfiguration {
     String BOOTSTRAP_SERVERS
 
     final static String STRING_SERIALIZER = "org.apache.kafka.common.serialization.StringSerializer"
+    final static String PAYLOAD_SERIALIZER = "com.cshfym.server.models.PayloadSerializer"
+
     @Bean
-    KafkaProducer<String,String> kafkaProducer() {
+    KafkaProducer<String,SimpleMessage> kafkaProducer() {
 
         Properties properties = new Properties()
 
         properties.put("bootstrap.servers", BOOTSTRAP_SERVERS)
         properties.put("key.serializer", STRING_SERIALIZER)
-        properties.put("value.serializer", STRING_SERIALIZER)
+        properties.put("value.serializer", PAYLOAD_SERIALIZER)
 
-        new KafkaProducer<String,String>(properties)
+        new KafkaProducer<String,SimpleMessage>(properties)
     }
 }

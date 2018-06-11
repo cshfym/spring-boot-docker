@@ -33,7 +33,7 @@ repositories {
 }
 
 springBoot {
-    mainClass = "com.cshfym.services.Application"
+    mainClass = "com.cshfym.server.Application"
 }
 
 sourceCompatibility = 1.8
